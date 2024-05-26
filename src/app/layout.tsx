@@ -11,7 +11,6 @@ import { MotionLazy } from 'src/components/animate/motion-lazy';
 import { SettingsDrawer, SettingsProvider } from 'src/components/settings';
 
 import { AuthProvider } from 'src/auth/context/jwt';
-import type { Viewport } from 'next'
 
 // ----------------------------------------------------------------------
 
@@ -28,7 +27,7 @@ export const metadata = {
   ],
 };
 
-export const viewport: Viewport = {
+export const viewport= {
   width: 'device-width', initialScale: 1, maximumScale: 1, themeColor: '#000'
 }
 
