@@ -1,9 +1,10 @@
+import MainLayout from "src/layouts/main";
 
 
 export default function RobotView() {  
     return (
-        <div>
-            <h1>RobotView</h1>
-        </div>
+        <MainLayout>
+            hello world
+        </MainLayout>
     )
 }
