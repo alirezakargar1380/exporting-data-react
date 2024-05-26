@@ -11,7 +11,7 @@ import { MotionLazy } from 'src/components/animate/motion-lazy';
 import { SettingsDrawer, SettingsProvider } from 'src/components/settings';
 
 import { AuthProvider } from 'src/auth/context/jwt';
-import { Viewport } from 'next';
+import type { Viewport } from 'next'
 
 // ----------------------------------------------------------------------
 
