@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import { usePathname } from 'src/routes/hooks';
 
 import Footer from './footer';
+import { Container } from '@mui/material';
 
 // ----------------------------------------------------------------------
 
@@ -28,7 +29,10 @@ export default function MainLayout({ children }: Props) {
           }),
         }}
       >
-        {children}
+        <Container sx={{ pt: 3 }}>
+          {children}
+        </Container>
+
       </Box>
 
       <Footer />
