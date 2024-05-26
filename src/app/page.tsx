@@ -4,6 +4,6 @@ import RobotView from 'src/sections/robot/view/robot-view';
 
 // ----------------------------------------------------------------------
 
-export default async function HomePage() {
+export default function HomePage() {
   return <RobotView />;
 }
