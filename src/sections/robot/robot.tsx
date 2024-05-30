@@ -62,7 +62,7 @@ export default function Robot() {
 
     const handleRunRobot = async () => {
         try {
-            await axiosInstance.delete('/api/selenium_bot/run/1').then(() => { })
+            await axiosInstance.post('/api/selenium_bot/run/1').then(() => { })
             enqueueSnackbar('Robot has been run', {
                 variant: 'success',
             });
