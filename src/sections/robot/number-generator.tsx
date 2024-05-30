@@ -16,6 +16,7 @@ export default function NumberGenerator() {
                         <TableCell>Id</TableCell>
                         <TableCell>Code</TableCell>
                         <TableCell>Checking status</TableCell>
+                        <TableCell>Extend</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -31,6 +32,9 @@ export default function NumberGenerator() {
                                 }>
                                     {code.checked_status}
                                 </Label>
+                            </TableCell>
+                            <TableCell>
+                                {code.extend}
                             </TableCell>
                         </TableRow>
                     ))}

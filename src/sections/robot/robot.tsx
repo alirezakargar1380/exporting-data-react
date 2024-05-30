@@ -8,8 +8,11 @@ import FormProvider, {
 } from 'src/components/hook-form';
 import axiosInstance from "src/utils/axios";
 import { useSnackbar } from 'src/components/snackbar';
+import { useState } from "react";
 
 export default function Robot() {
+    const [biggerThan, setBiggerThan] = useState<string>('0')
+
     const methods = useForm<any>({
         defaultValues: {
             one: [],
@@ -62,7 +65,7 @@ export default function Robot() {
 
     const handleRunRobot = async () => {
         try {
-            await axiosInstance.post('/api/selenium_bot/run/1').then(() => { })
+            await axiosInstance.post('/api/selenium_bot/run/' + biggerThan).then(() => { })
             enqueueSnackbar('Robot has been run', {
                 variant: 'success',
             });
@@ -78,6 +81,7 @@ export default function Robot() {
                     <Typography variant="h3">
                         Robot Controller
                     </Typography>
+                    <TextField label="run code with ids that are bigger than?" variant="filled" onChange={(e: any) => setBiggerThan(e.target.value)} />
                     <Stack direction={'row'} spacing={2}>
                         <Button variant="soft" color="error">Stop Bot</Button>
                         <Button variant="soft" color="error" onClick={handleDeleteAllOrderCodes}>Delete All Order Codes</Button>
