@@ -11,6 +11,7 @@ import { MotionLazy } from 'src/components/animate/motion-lazy';
 import { SettingsProvider } from 'src/components/settings';
 
 import { AuthProvider } from 'src/auth/context/jwt';
+import SnackbarProvider from 'src/components/snackbar/snackbar-provider';
 
 // ----------------------------------------------------------------------
 
@@ -27,7 +28,7 @@ export const metadata = {
   ],
 };
 
-export const viewport= {
+export const viewport = {
   width: 'device-width', initialScale: 1, maximumScale: 1, themeColor: '#000'
 }
 
@@ -52,8 +53,10 @@ export default function RootLayout({ children }: Props) {
           >
             <ThemeProvider>
               <MotionLazy>
-                <ProgressBar />
-                {children}
+                <SnackbarProvider>
+                  {/* <ProgressBar /> */}
+                  {children}
+                </SnackbarProvider>
               </MotionLazy>
             </ThemeProvider>
           </SettingsProvider>

@@ -1,3 +1,5 @@
+
+
 import LoadingButton from "@mui/lab/LoadingButton";
 import { Box, Button, Input, Stack, TextField, Typography } from "@mui/material";
 import { useForm } from "react-hook-form";
@@ -5,6 +7,7 @@ import FormProvider, {
     RHFTextField,
 } from 'src/components/hook-form';
 import axiosInstance from "src/utils/axios";
+import { useSnackbar } from 'src/components/snackbar';
 
 export default function Robot() {
     const methods = useForm<any>({
@@ -31,15 +34,42 @@ export default function Robot() {
         formState: { isSubmitting },
     } = methods;
 
+    const { enqueueSnackbar } = useSnackbar();
+
     const values = watch();
 
-    const onSubmit = handleSubmit( async (data) => {
+    const onSubmit = handleSubmit(async (data) => {
         try {
-            await axiosInstance.post('/api/number_generator', data).then(() => {})
+            await axiosInstance.post('/api/number_generator', data).then(() => { })
+            enqueueSnackbar("Numbers have been generated", {
+                variant: 'info'
+            })
         } catch (error) {
             console.error(error);
         }
     });
+
+    const handleDeleteAllOrderCodes = async () => {
+        try {
+            await axiosInstance.delete('/api/order_code/delete_all').then(() => { })
+            enqueueSnackbar('All order codes have been deleted', {
+                variant: 'success',
+            });
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    const handleRunRobot = async () => {
+        try {
+            await axiosInstance.delete('/api/selenium_bot/run/1').then(() => { })
+            enqueueSnackbar('Robot has been run', {
+                variant: 'success',
+            });
+        } catch (error) {
+            console.error(error);
+        }
+    }
 
     return (
         <Box>
@@ -50,7 +80,8 @@ export default function Robot() {
                     </Typography>
                     <Stack direction={'row'} spacing={2}>
                         <Button variant="soft" color="error">Stop Bot</Button>
-                        <Button variant="soft" color="success">Rum Robot</Button>
+                        <Button variant="soft" color="error" onClick={handleDeleteAllOrderCodes}>Delete All Order Codes</Button>
+                        <Button variant="soft" color="success" onClick={handleRunRobot}>Rum Robot</Button>
                     </Stack>
                 </Box>
                 <Box>
