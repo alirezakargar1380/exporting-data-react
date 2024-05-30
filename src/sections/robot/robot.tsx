@@ -81,7 +81,7 @@ export default function Robot() {
                     <Typography variant="h3">
                         Robot Controller
                     </Typography>
-                    <TextField label="run code with ids that are bigger than?" variant="filled" onChange={(e: any) => setBiggerThan(e.target.value)} />
+                    <TextField label="run code with ids that are bigger than?" value={biggerThan} variant="filled" sx={{ width: 1, my: 3 }} onChange={(e: any) => setBiggerThan(e.target.value)} />
                     <Stack direction={'row'} spacing={2}>
                         <Button variant="soft" color="error">Stop Bot</Button>
                         <Button variant="soft" color="error" onClick={handleDeleteAllOrderCodes}>Delete All Order Codes</Button>
