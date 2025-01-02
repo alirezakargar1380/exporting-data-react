@@ -98,6 +98,7 @@ export default function Robot() {
                             <Label variant="soft" color="success">normal</Label>
                         </Box>
                         <Button variant="contained" color="error" size="large">Stop The Bot</Button>
+                        <Button variant="contained" color="error" size="large" disabled>Waiting...</Button>
                     </Stack>
                     <TextField label="run code with ids that are bigger than?" value={biggerThan} variant="filled" sx={{ width: 1, my: 3 }} onChange={(e: any) => setBiggerThan(e.target.value)} />
                     <Stack direction={'row'} spacing={2}>
