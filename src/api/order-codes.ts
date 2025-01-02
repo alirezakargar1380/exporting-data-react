@@ -7,13 +7,13 @@ import { IOrderCode } from 'src/types/order-code';
 // ----------------------------------------------------------------------
 
 export function useGetOrderCodes() {
-  const URL = '/api/order_code/get/0/100';
+  const URL = '/api/order-codes/get/0/100';
 
   const { data, isLoading, error, isValidating } = useSWR(URL, fetcher);
 
   const memoizedValue = useMemo(
     () => ({
-      order_codes: (data?.data as IOrderCode[])|| []
+      order_codes: (data as IOrderCode[])|| []
       // profile_types: (data as IProductProfileType[]) || [],
       // productsLoading: isLoading,
       // productsError: error,

@@ -1,6 +1,7 @@
 import axios, { AxiosRequestConfig } from 'axios';
 
 import { HOST_API } from 'src/config-global';
+import { number } from 'yup';
 
 // ----------------------------------------------------------------------
 
@@ -50,4 +51,10 @@ export const endpoints = {
     details: '/api/product/details',
     search: '/api/product/search',
   },
+  number_generator: {
+    generate: '/api/number-generator',
+  },
+  order_codes: {
+    delete_all: '/api/order-codes/delete_all',
+  }
 };

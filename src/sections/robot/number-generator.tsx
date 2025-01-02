@@ -26,15 +26,15 @@ export default function NumberGenerator() {
                             <TableCell>{code.order_code}</TableCell>
                             <TableCell>
                                 <Label variant="filled" color={
-                                    (code.checked_status === "false" && "error") ||
-                                    (code.checked_status !== "false" && "primary")
+                                    (code.checked_status === false && "error") ||
+                                    (code.checked_status !== false && "primary")
                                     || 'default'
                                 }>
-                                    {code.checked_status}
+                                    {code.checked_status ? "Checked" : "Not checked"}
                                 </Label>
                             </TableCell>
                             <TableCell>
-                                {code.extend}
+                                {code.extend || '-'}
                             </TableCell>
                         </TableRow>
                     ))}

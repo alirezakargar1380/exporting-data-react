@@ -6,9 +6,10 @@ import { useForm } from "react-hook-form";
 import FormProvider, {
     RHFTextField,
 } from 'src/components/hook-form';
-import axiosInstance from "src/utils/axios";
+import axiosInstance, { endpoints } from "src/utils/axios";
 import { useSnackbar } from 'src/components/snackbar';
 import { useState } from "react";
+import Label from "src/components/label";
 
 export default function Robot() {
     const [biggerThan, setBiggerThan] = useState<string>('0')
@@ -43,7 +44,7 @@ export default function Robot() {
 
     const onSubmit = handleSubmit(async (data) => {
         try {
-            await axiosInstance.post('/api/number_generator', data).then(() => { })
+            await axiosInstance.post(endpoints.number_generator.generate, data).then(() => { })
             enqueueSnackbar("Numbers have been generated", {
                 variant: 'info'
             })
@@ -54,7 +55,7 @@ export default function Robot() {
 
     const handleDeleteAllOrderCodes = async () => {
         try {
-            await axiosInstance.delete('/api/order_code/delete_all').then(() => { })
+            await axiosInstance.delete(endpoints.order_codes.delete_all).then(() => { })
             enqueueSnackbar('All order codes have been deleted', {
                 variant: 'success',
             });
@@ -81,11 +82,27 @@ export default function Robot() {
                     <Typography variant="h3">
                         Robot Controller
                     </Typography>
+                    <Stack spacing={2} mt={2}>
+                        <Box display={'flex'} gap={2}>
+                            <Typography variant="h6">
+                                Status:
+                            </Typography>
+                            <Label variant="soft" color="error">stoped</Label>
+                            <Label variant="soft" color="success">is running</Label>
+                        </Box>
+                        <Box display={'flex'} gap={2}>
+                            <Typography variant="h6">
+                                Stop Request:
+                            </Typography>
+                            <Label variant="soft" color="warning">waiting...</Label>
+                            <Label variant="soft" color="success">normal</Label>
+                        </Box>
+                        <Button variant="contained" color="error" size="large">Stop The Bot</Button>
+                    </Stack>
                     <TextField label="run code with ids that are bigger than?" value={biggerThan} variant="filled" sx={{ width: 1, my: 3 }} onChange={(e: any) => setBiggerThan(e.target.value)} />
                     <Stack direction={'row'} spacing={2}>
-                        <Button variant="soft" color="error">Stop Bot</Button>
-                        <Button variant="soft" color="error" onClick={handleDeleteAllOrderCodes}>Delete All Order Codes</Button>
                         <Button variant="soft" color="success" onClick={handleRunRobot}>Rum Robot</Button>
+                        <Button variant="soft" color="error" onClick={handleDeleteAllOrderCodes}>Delete All Order Codes</Button>
                     </Stack>
                 </Box>
                 <Box>
