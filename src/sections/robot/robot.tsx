@@ -10,9 +10,12 @@ import axiosInstance, { endpoints } from "src/utils/axios";
 import { useSnackbar } from 'src/components/snackbar';
 import { useState } from "react";
 import Label from "src/components/label";
+import { useGetSettings } from "src/api/settings";
 
 export default function Robot() {
     const [biggerThan, setBiggerThan] = useState<string>('0')
+
+    const { settings } = useGetSettings()
 
     const methods = useForm<any>({
         defaultValues: {
@@ -66,13 +69,20 @@ export default function Robot() {
 
     const handleRunRobot = async () => {
         try {
-            await axiosInstance.post('/api/selenium_bot/run/' + biggerThan).then(() => { })
+            await axiosInstance.post('/api/bot/run/' + biggerThan).then(() => { })
             enqueueSnackbar('Robot has been run', {
                 variant: 'success',
             });
         } catch (error) {
             console.error(error);
         }
+    }
+
+    const requestStopBot = async () => {
+        await axiosInstance.post(endpoints.settings.stop).then(() => {
+            settings.stop_bot_request = true
+            enqueueSnackbar('Robot will be stoped...', { variant: 'error' })
+        })
     }
 
     return (
@@ -85,20 +95,28 @@ export default function Robot() {
                     <Stack spacing={2} mt={2}>
                         <Box display={'flex'} gap={2}>
                             <Typography variant="h6">
-                                Status:
+                                status:
                             </Typography>
-                            <Label variant="soft" color="error">stoped</Label>
-                            <Label variant="soft" color="success">is running</Label>
+                            {settings.bot_status ? (
+                                <Label variant="soft" color="success">is running</Label>
+                            ) : (
+                                <Label variant="soft" color="error">stoped</Label>
+                            )}
                         </Box>
-                        <Box display={'flex'} gap={2}>
+                        {/* <Box display={'flex'} gap={2}>
                             <Typography variant="h6">
                                 Stop Request:
                             </Typography>
                             <Label variant="soft" color="warning">waiting...</Label>
                             <Label variant="soft" color="success">normal</Label>
-                        </Box>
-                        <Button variant="contained" color="error" size="large">Stop The Bot</Button>
-                        <Button variant="contained" color="error" size="large" disabled>Waiting...</Button>
+                        </Box> */}
+
+                        {settings.stop_bot_request ? (
+                            <Button variant="contained" color="error" size="large" disabled>Wait To Robot Stoped...</Button>
+                        ) : (
+                            <Button variant="contained" color="error" onClick={requestStopBot} size="large">Stop The Bot</Button>
+                        )}
+
                     </Stack>
                     <TextField label="run code with ids that are bigger than?" value={biggerThan} variant="filled" sx={{ width: 1, my: 3 }} onChange={(e: any) => setBiggerThan(e.target.value)} />
                     <Stack direction={'row'} spacing={2}>
@@ -116,8 +134,8 @@ export default function Robot() {
                             rowGap={3}
                             display="grid"
                             gridTemplateColumns={{
-                                xs: 'repeat(4, 1fr)',
-                                // md: 'repeat(2, 1fr)',
+                                xs: 'repeat(2, 1fr)',
+                                md: 'repeat(4, 1fr)',
                             }}
                         >
                             <TextField label="one" variant="filled" onChange={(e: any) => setValue('one', e.target.value.split(','))} />
