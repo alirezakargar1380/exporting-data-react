@@ -14,7 +14,6 @@ import { useGetSettings } from "src/api/settings";
 
 export default function Robot() {
     const [run, setRun] = useState<boolean>(false);
-    const [stop, setStop] = useState<boolean>(false);
     const [biggerThan, setBiggerThan] = useState<string>('0');
 
     const { settings, refreshSetting } = useGetSettings()
@@ -99,8 +98,6 @@ export default function Robot() {
 
     const requestStopBot = async () => {
         await axiosInstance.post(endpoints.settings.stop).then(() => {
-            settings.stop_bot_request = true
-            setStop(true)
             enqueueSnackbar('Robot will be stoped...', { variant: 'error' })
         })
     }
