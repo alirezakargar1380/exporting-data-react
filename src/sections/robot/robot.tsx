@@ -137,7 +137,7 @@ export default function Robot() {
                     </Stack>
                     <TextField label="run code with ids that are bigger than?" value={biggerThan} variant="filled" sx={{ width: 1, my: 3 }} onChange={(e: any) => setBiggerThan(e.target.value)} />
                     <Stack direction={'row'} spacing={2}>
-                        <Button variant="soft" color="success" onClick={handleRunRobot} disabled={run}>Rum Robot</Button>
+                        <Button variant="soft" color="success" onClick={handleRunRobot} disabled={settings.bot_status}>Rum Robot</Button>
                         <Button variant="soft" color="error" onClick={handleDeleteAllOrderCodes}>Delete All Order Codes</Button>
                     </Stack>
                 </Box>
