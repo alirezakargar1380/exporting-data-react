@@ -8,7 +8,7 @@ import FormProvider, {
 } from 'src/components/hook-form';
 import axiosInstance, { endpoints } from "src/utils/axios";
 import { useSnackbar } from 'src/components/snackbar';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Label from "src/components/label";
 import { useGetSettings } from "src/api/settings";
 
@@ -57,6 +57,10 @@ export default function Robot() {
             console.error(error);
         }
     });
+
+    useEffect(() => {
+        if (settings.bot_status) setRun(true)
+    }, [settings.bot_status])
 
     const handleDeleteAllOrderCodes = async () => {
         try {
