@@ -60,7 +60,7 @@ export default function Robot() {
     useEffect(() => {
         const interval = setInterval(() => {
             refreshSetting();
-        }, 2000);
+        }, 4000);
 
         // Cleanup function to clear interval when component unmounts
         return () => clearInterval(interval);
