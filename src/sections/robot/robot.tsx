@@ -75,8 +75,11 @@ export default function Robot() {
 
     const handleRunRobot = async () => {
         try {
-            await axiosInstance.post('/api/bot/run/' + biggerThan).then(() => { })
             setRun(true);
+            enqueueSnackbar('wait until get notif for running robot', {
+                variant: 'info',
+            });
+            await axiosInstance.post('/api/bot/run/' + biggerThan).then(() => { })
             enqueueSnackbar('Robot has been run', {
                 variant: 'success',
             });
