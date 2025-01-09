@@ -1,4 +1,4 @@
-import useSWR from 'swr';
+import useSWR, { mutate } from 'swr';
 import { useMemo } from 'react';
 
 import { fetcher, endpoints } from 'src/utils/axios';
@@ -12,9 +12,14 @@ export function useGetSettings() {
 
   const { data, isLoading, error, isValidating } = useSWR(URL, fetcher);
 
+  const refreshSetting = () => {
+    mutate(URL);
+  };
+
   const memoizedValue = useMemo(
     () => ({
-      settings: (data as ISettings)|| {}
+      settings: (data as ISettings)|| {},
+      refreshSetting
       // profile_types: (data as IProductProfileType[]) || [],
       // productsLoading: isLoading,
       // productsError: error,

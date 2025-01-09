@@ -17,7 +17,7 @@ export default function Robot() {
     const [stop, setStop] = useState<boolean>(false);
     const [biggerThan, setBiggerThan] = useState<string>('0');
 
-    const { settings } = useGetSettings()
+    const { settings, refreshSetting } = useGetSettings()
 
     const methods = useForm<any>({
         defaultValues: {
@@ -57,6 +57,15 @@ export default function Robot() {
             console.error(error);
         }
     });
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            refreshSetting();
+        }, 2000);
+
+        // Cleanup function to clear interval when component unmounts
+        return () => clearInterval(interval);
+    }, []);
 
     useEffect(() => {
         if (settings.bot_status) setRun(true)
@@ -122,7 +131,7 @@ export default function Robot() {
                             <Label variant="soft" color="success">normal</Label>
                         </Box> */}
 
-                        {(settings.stop_bot_request || stop)? (
+                        {(settings.stop_bot_request || stop) ? (
                             <Button variant="contained" color="error" size="large" disabled>Wait To Robot Stoped...</Button>
                         ) : (
                             <Button variant="contained" color="error" onClick={requestStopBot} size="large">Stop The Bot</Button>
