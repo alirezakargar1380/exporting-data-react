@@ -1,4 +1,4 @@
-import useSWR from 'swr';
+import useSWR, { mutate } from 'swr';
 import { useMemo } from 'react';
 
 import { fetcher, endpoints } from 'src/utils/axios';
@@ -11,9 +11,14 @@ export function useGetOrderCodes() {
 
   const { data, isLoading, error, isValidating } = useSWR(URL, fetcher);
 
+  const refresh = () => {
+    mutate(URL);
+  };
+
   const memoizedValue = useMemo(
     () => ({
-      order_codes: (data as IOrderCode[])|| []
+      order_codes: (data as IOrderCode[])|| [],
+      refresh
       // profile_types: (data as IProductProfileType[]) || [],
       // productsLoading: isLoading,
       // productsError: error,

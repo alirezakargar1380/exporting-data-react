@@ -1,12 +1,20 @@
 import { Box, Table, TableBody, TableCell, TableHead, TableRow, Typography } from "@mui/material";
+import { useEffect } from "react";
 import { useGetOrderCodes } from "src/api/order-codes";
 import Label from "src/components/label";
 import { IOrderCode } from "src/types/order-code";
 
 export default function NumberGenerator() {
-    const { order_codes } = useGetOrderCodes();
+    const { order_codes, refresh } = useGetOrderCodes();
 
-    // console.log(order_codes)
+    useEffect(() => {
+        const interval = setInterval(() => {
+            refresh();
+        }, 3500);
+
+        // Cleanup function to clear interval when component unmounts
+        return () => clearInterval(interval);
+    }, []);
 
     return (
         <Box sx={{ mt: 4 }}>
