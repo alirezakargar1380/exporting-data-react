@@ -11,10 +11,14 @@ import { useSnackbar } from 'src/components/snackbar';
 import { useEffect, useState } from "react";
 import Label from "src/components/label";
 import { useGetSettings } from "src/api/settings";
+import { ConfirmDialog } from "src/components/custom-dialog";
+import { useBoolean } from "src/hooks/use-boolean";
 
 export default function Robot() {
     const [run, setRun] = useState<boolean>(false);
     const [biggerThan, setBiggerThan] = useState<string>('0');
+
+    const confirm = useBoolean();
 
     const { settings, refreshSetting } = useGetSettings()
 
@@ -76,6 +80,8 @@ export default function Robot() {
             enqueueSnackbar('All order codes have been deleted', {
                 variant: 'success',
             });
+
+            confirm.onFalse()
         } catch (error) {
             console.error(error);
         }
@@ -104,6 +110,19 @@ export default function Robot() {
 
     return (
         <Box>
+
+            <ConfirmDialog
+                open={confirm.value}
+                onClose={confirm.onFalse}
+                title="Delete"
+                content="Are you sure want to delete?"
+                action={
+                    <Button variant="contained" color="error" onClick={handleDeleteAllOrderCodes}>
+                        Delete
+                    </Button>
+                }
+            />
+
             <Stack spacing={4}>
                 <Box>
                     <Typography variant="h3">
@@ -138,7 +157,7 @@ export default function Robot() {
                     <TextField label="run code with ids that are bigger than?" value={biggerThan} variant="filled" sx={{ width: 1, my: 3 }} onChange={(e: any) => setBiggerThan(e.target.value)} />
                     <Stack direction={'row'} spacing={2}>
                         <Button variant="soft" color="success" onClick={handleRunRobot} disabled={settings.bot_status}>Rum Robot</Button>
-                        <Button variant="soft" color="error" onClick={handleDeleteAllOrderCodes}>Delete All Order Codes</Button>
+                        <Button variant="soft" color="error" onClick={() => confirm.onTrue()}>Delete All Order Codes</Button>
                     </Stack>
                 </Box>
                 <Box>
