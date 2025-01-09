@@ -28,12 +28,12 @@ export default function NumberGenerator() {
                                 <Label variant="filled" color={
                                     (code.checked_status === false && "error") ||
                                     (code.checked_status === null && "warning") ||
-                                    (code.checked_status !== false && "primary")
+                                    (code.checked_status === true && "primary")
                                     || 'default'
                                 }>
                                     {code.checked_status === true && "Checked"}
                                     {code.checked_status === false && "Not Available"}
-                                    {code.checked_status === null && "Not Checked"}
+                                    {code.checked_status === null && "Not Checked Yet"}
                                 </Label>
                             </TableCell>
                             <TableCell>
