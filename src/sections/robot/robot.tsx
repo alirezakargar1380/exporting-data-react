@@ -131,7 +131,7 @@ export default function Robot() {
                             <Label variant="soft" color="success">normal</Label>
                         </Box> */}
 
-                        {(settings.stop_bot_request || stop) ? (
+                        {(settings.stop_bot_request) ? (
                             <Button variant="contained" color="error" size="large" disabled>Wait To Robot Stoped...</Button>
                         ) : (
                             <Button variant="contained" color="error" onClick={requestStopBot} size="large">Stop The Bot</Button>
