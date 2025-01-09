@@ -7,14 +7,14 @@ import { IOrderCode } from "src/types/order-code";
 export default function NumberGenerator() {
     const { order_codes, refresh } = useGetOrderCodes();
 
-    // useEffect(() => {
-    //     const interval = setInterval(() => {
-    //         refresh();
-    //     }, 6000);
+    useEffect(() => {
+        const interval = setInterval(() => {
+            refresh();
+        }, 10000);
 
-    //     // Cleanup function to clear interval when component unmounts
-    //     return () => clearInterval(interval);
-    // }, []);
+        // Cleanup function to clear interval when component unmounts
+        return () => clearInterval(interval);
+    }, []);
 
     return (
         <Box sx={{ mt: 4 }}>
