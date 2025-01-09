@@ -13,8 +13,9 @@ import Label from "src/components/label";
 import { useGetSettings } from "src/api/settings";
 
 export default function Robot() {
-    const [stop, setStop] = useState<boolean>(false)
-    const [biggerThan, setBiggerThan] = useState<string>('0')
+    const [run, setRun] = useState<boolean>(false);
+    const [stop, setStop] = useState<boolean>(false);
+    const [biggerThan, setBiggerThan] = useState<string>('0');
 
     const { settings } = useGetSettings()
 
@@ -71,6 +72,7 @@ export default function Robot() {
     const handleRunRobot = async () => {
         try {
             await axiosInstance.post('/api/bot/run/' + biggerThan).then(() => { })
+            setRun(true);
             enqueueSnackbar('Robot has been run', {
                 variant: 'success',
             });
@@ -122,7 +124,7 @@ export default function Robot() {
                     </Stack>
                     <TextField label="run code with ids that are bigger than?" value={biggerThan} variant="filled" sx={{ width: 1, my: 3 }} onChange={(e: any) => setBiggerThan(e.target.value)} />
                     <Stack direction={'row'} spacing={2}>
-                        <Button variant="soft" color="success" onClick={handleRunRobot}>Rum Robot</Button>
+                        <Button variant="soft" color="success" onClick={handleRunRobot} disabled={run}>Rum Robot</Button>
                         <Button variant="soft" color="error" onClick={handleDeleteAllOrderCodes}>Delete All Order Codes</Button>
                     </Stack>
                 </Box>
