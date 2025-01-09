@@ -13,6 +13,7 @@ import Label from "src/components/label";
 import { useGetSettings } from "src/api/settings";
 
 export default function Robot() {
+    const [stop, setStop] = useState<boolean>(false)
     const [biggerThan, setBiggerThan] = useState<string>('0')
 
     const { settings } = useGetSettings()
@@ -81,6 +82,7 @@ export default function Robot() {
     const requestStopBot = async () => {
         await axiosInstance.post(endpoints.settings.stop).then(() => {
             settings.stop_bot_request = true
+            setStop(true)
             enqueueSnackbar('Robot will be stoped...', { variant: 'error' })
         })
     }
@@ -111,7 +113,7 @@ export default function Robot() {
                             <Label variant="soft" color="success">normal</Label>
                         </Box> */}
 
-                        {settings.stop_bot_request ? (
+                        {(settings.stop_bot_request || stop)? (
                             <Button variant="contained" color="error" size="large" disabled>Wait To Robot Stoped...</Button>
                         ) : (
                             <Button variant="contained" color="error" onClick={requestStopBot} size="large">Stop The Bot</Button>
