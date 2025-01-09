@@ -105,7 +105,7 @@ export default function Robot() {
                             <Typography variant="h6">
                                 status:
                             </Typography>
-                            {settings.bot_status ? (
+                            {(settings.bot_status || run) ? (
                                 <Label variant="soft" color="success">is running</Label>
                             ) : (
                                 <Label variant="soft" color="error">stoped</Label>
