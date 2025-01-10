@@ -30,6 +30,9 @@ export const endpoints = {
   chat: '/api/chat',
   kanban: '/api/kanban',
   calendar: '/api/calendar',
+  file: {
+    download: `${HOST_API}/api/files`,
+  },
   bot: {},
   settings: {
     stop: '/api/settings/stop'
