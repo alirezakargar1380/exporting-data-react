@@ -17,6 +17,7 @@ import { useBoolean } from "src/hooks/use-boolean";
 export default function Robot() {
     const [run, setRun] = useState<boolean>(false);
     const [biggerThan, setBiggerThan] = useState<string>('0');
+    const [time, setTime] = useState<string>('5');
 
     const confirm = useBoolean();
 
@@ -93,7 +94,7 @@ export default function Robot() {
             enqueueSnackbar('wait until get notif for running robot', {
                 variant: 'info',
             });
-            await axiosInstance.post('/api/bot/run/' + biggerThan).then(() => { })
+            await axiosInstance.post('/api/bot/run/' + biggerThan + `/${time}`).then(() => { })
             enqueueSnackbar('Robot has been run', {
                 variant: 'success',
             });
@@ -155,6 +156,7 @@ export default function Robot() {
 
                     </Stack>
                     <TextField label="run code with ids that are bigger than?" value={biggerThan} variant="filled" sx={{ width: 1, my: 3 }} onChange={(e: any) => setBiggerThan(e.target.value)} />
+                    <TextField label="enter time (seconds) you want run each code" value={time} variant="filled" sx={{ width: 1, mb: 3 }} onChange={(e: any) => setTime(e.target.value)} />
                     <Stack direction={'row'} spacing={2}>
                         <Button variant="soft" color="success" onClick={handleRunRobot} disabled={settings.bot_status}>Rum Robot</Button>
                         <Button variant="soft" color="error" onClick={() => confirm.onTrue()}>Delete All Order Codes</Button>
