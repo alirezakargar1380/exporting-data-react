@@ -7,7 +7,7 @@ import { IOrderCode } from 'src/types/order-code';
 // ----------------------------------------------------------------------
 
 export function useGetOrderCodes() {
-  const URL = '/api/order-codes/get/0/1000';
+  const URL = '/api/order-codes/get/0/100';
 
   const { data, isLoading, error, isValidating } = useSWR(URL, fetcher);
 
