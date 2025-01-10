@@ -10,7 +10,7 @@ export default function NumberGenerator() {
     useEffect(() => {
         const interval = setInterval(() => {
             refresh();
-        }, 15000);
+        }, 19000);
 
         // Cleanup function to clear interval when component unmounts
         return () => clearInterval(interval);
