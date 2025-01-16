@@ -18,9 +18,9 @@ export function useGetOrderCodes() {
   const memoizedValue = useMemo(
     () => ({
       order_codes: (data as IOrderCode[])|| [],
-      refresh
+      refresh,
       // profile_types: (data as IProductProfileType[]) || [],
-      // productsLoading: isLoading,
+      isLoading: isLoading,
       // productsError: error,
       // productsValidating: isValidating,
       // productsEmpty: !isLoading && !data?.length,

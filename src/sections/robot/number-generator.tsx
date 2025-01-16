@@ -5,7 +5,7 @@ import Label from "src/components/label";
 import { IOrderCode } from "src/types/order-code";
 
 export default function NumberGenerator() {
-    const { order_codes, refresh } = useGetOrderCodes();
+    const { order_codes, isLoading, refresh } = useGetOrderCodes();
 
     // useEffect(() => {
     //     const interval = setInterval(() => {
@@ -18,39 +18,43 @@ export default function NumberGenerator() {
 
     return (
         <Box sx={{ mt: 4 }}>
-            <Table>
-                <TableHead>
-                    <TableRow>
-                        <TableCell>Id</TableCell>
-                        <TableCell>Code</TableCell>
-                        <TableCell>Checking status</TableCell>
-                        <TableCell>Extend</TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {order_codes.map((code: IOrderCode, i: number) => (
-                        <TableRow key={i}>
-                            <TableCell>{code.id}</TableCell>
-                            <TableCell>{code.order_code}</TableCell>
-                            <TableCell>
-                                <Label variant="filled" color={
-                                    (code.checked_status === false && "error") ||
-                                    (code.checked_status === null && "warning") ||
-                                    (code.checked_status === true && "primary")
-                                    || 'default'
-                                }>
-                                    {code.checked_status === true && "Checked"}
-                                    {code.checked_status === false && "Not Available"}
-                                    {code.checked_status === null && "Not Checked Yet"}
-                                </Label>
-                            </TableCell>
-                            <TableCell>
-                                {code.extend || '-' }
-                            </TableCell>
+            {isLoading ? (
+                <Typography variant="h5">Loading...</Typography>
+            ) : (
+                <Table>
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>Id</TableCell>
+                            <TableCell>Code</TableCell>
+                            <TableCell>Checking status</TableCell>
+                            <TableCell>Extend</TableCell>
                         </TableRow>
-                    ))}
-                </TableBody>
-            </Table>
+                    </TableHead>
+                    <TableBody>
+                        {order_codes.map((code: IOrderCode, i: number) => (
+                            <TableRow key={i}>
+                                <TableCell>{code.id}</TableCell>
+                                <TableCell>{code.order_code}</TableCell>
+                                <TableCell>
+                                    <Label variant="filled" color={
+                                        (code.checked_status === false && "error") ||
+                                        (code.checked_status === null && "warning") ||
+                                        (code.checked_status === true && "primary")
+                                        || 'default'
+                                    }>
+                                        {code.checked_status === true && "Checked"}
+                                        {code.checked_status === false && "Not Available"}
+                                        {code.checked_status === null && "Not Checked Yet"}
+                                    </Label>
+                                </TableCell>
+                                <TableCell>
+                                    {code.extend || '-'}
+                                </TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            )}
         </Box>
     )
 }
