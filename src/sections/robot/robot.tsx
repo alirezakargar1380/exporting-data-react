@@ -175,19 +175,19 @@ export default function Robot() {
                             </Typography>
                             <Label variant="soft" color="warning">{settings.bigger_than}</Label>
                         </Box>
-                        
+
                         <Box display={'flex'} gap={2}>
                             <Typography variant="h6">
                                 current id:
                             </Typography>
                             <Label variant="soft" color="warning">{settings.id_current}</Label>
                         </Box>
-                        
+
                         <Box display={'flex'} gap={2}>
                             <Typography variant="h6">
                                 time:
                             </Typography>
-                            <Label variant="soft" color="warning">{settings.time}</Label>
+                            <Label variant="soft" color="warning">{settings.time + " " + "seconds"}</Label>
                         </Box>
 
                         {(settings.stop_bot_request) ? (
