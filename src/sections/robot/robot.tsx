@@ -106,8 +106,8 @@ export default function Robot() {
 
     const handleRunRobot = async () => {
         try {
-            if (+time > 60)
-                return enqueueSnackbar('time must be less than 60', {
+            if (+time > 60 || +time <= 3)
+                return enqueueSnackbar('time must be less than 60 and bigger than 3', {
                     variant: 'error',
                 });
 
