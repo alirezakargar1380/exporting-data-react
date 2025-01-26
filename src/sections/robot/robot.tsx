@@ -105,13 +105,13 @@ export default function Robot() {
     const handleRunRobot = async () => {
         try {
             setRun(true);
-            enqueueSnackbar('wait until get notif for running robot', {
-                variant: 'info',
-            });
-            await axiosInstance.post('/api/bot/run/' + biggerThan + `/${time}`).then(() => { })
-            // enqueueSnackbar('Robot has been run', {
-            //     variant: 'success',
+            // enqueueSnackbar('wait until get notif for running robot', {
+            //     variant: 'info',
             // });
+            await axiosInstance.post('/api/bot/run/' + biggerThan + `/${time}`).then(() => { });
+            enqueueSnackbar('Robot has been run', {
+                variant: 'success',
+            });
         } catch (error) {
             console.error(error);
         }
@@ -185,6 +185,8 @@ export default function Robot() {
                     <TextField label="enter time (seconds) you want run each code" value={time} variant="filled" sx={{ width: 1, mb: 3 }} onChange={(e: any) => setTime(e.target.value)} />
                     <Stack direction={'row'} spacing={2} mb={3}>
                         current id: {settings.id_current}
+                        bigger than: {settings.bigger_than}
+                        time: {settings.time}
                     </Stack>
                     <Stack direction={'row'} spacing={2}>
                         <Button variant="soft" color="success" onClick={handleRunRobot} disabled={settings.bot_status}>Rum Robot</Button>
