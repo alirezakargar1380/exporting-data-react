@@ -176,31 +176,31 @@ export default function Robot() {
 
                         <Divider />
 
+                        <Box display={'flex'} gap={2}>
+                            <Typography variant="h6">
+                                bigger than:
+                            </Typography>
+                            <Label variant="soft" color="warning">{settings.bigger_than}</Label>
+                        </Box>
+
+                        <Box display={'flex'} gap={2}>
+                            <Typography variant="h6">
+                                current id:
+                            </Typography>
+                            <Label variant="soft" color="info">{settings.id_current}</Label>
+                        </Box>
+
+                        <Box display={'flex'} gap={2}>
+                            <Typography variant="h6">
+                                time:
+                            </Typography>
+                            <Label variant="soft" color="warning">{settings.time + " " + "seconds"}</Label>
+                        </Box>
+
+                        <Divider />
+
                         {(settings.bot_status) && (
                             <Box>
-                                <Box display={'flex'} gap={2}>
-                                    <Typography variant="h6">
-                                        bigger than:
-                                    </Typography>
-                                    <Label variant="soft" color="warning">{settings.bigger_than}</Label>
-                                </Box>
-
-                                <Box display={'flex'} gap={2}>
-                                    <Typography variant="h6">
-                                        current id:
-                                    </Typography>
-                                    <Label variant="soft" color="info">{settings.id_current}</Label>
-                                </Box>
-
-                                <Box display={'flex'} gap={2}>
-                                    <Typography variant="h6">
-                                        time:
-                                    </Typography>
-                                    <Label variant="soft" color="warning">{settings.time + " " + "seconds"}</Label>
-                                </Box>
-
-                                <Divider />
-
                                 <Box display={'flex'} gap={2}>
                                     <Typography variant="h6">
                                         code left:
