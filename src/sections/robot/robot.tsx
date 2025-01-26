@@ -176,41 +176,45 @@ export default function Robot() {
 
                         <Divider />
 
-                        <Box display={'flex'} gap={2}>
-                            <Typography variant="h6">
-                                bigger than:
-                            </Typography>
-                            <Label variant="soft" color="warning">{settings.bigger_than}</Label>
-                        </Box>
+                        {(settings.bot_status) && (
+                            <Box>
+                                <Box display={'flex'} gap={2}>
+                                    <Typography variant="h6">
+                                        bigger than:
+                                    </Typography>
+                                    <Label variant="soft" color="warning">{settings.bigger_than}</Label>
+                                </Box>
 
-                        <Box display={'flex'} gap={2}>
-                            <Typography variant="h6">
-                                current id:
-                            </Typography>
-                            <Label variant="soft" color="info">{settings.id_current}</Label>
-                        </Box>
+                                <Box display={'flex'} gap={2}>
+                                    <Typography variant="h6">
+                                        current id:
+                                    </Typography>
+                                    <Label variant="soft" color="info">{settings.id_current}</Label>
+                                </Box>
 
-                        <Box display={'flex'} gap={2}>
-                            <Typography variant="h6">
-                                time:
-                            </Typography>
-                            <Label variant="soft" color="warning">{settings.time + " " + "seconds"}</Label>
-                        </Box>
+                                <Box display={'flex'} gap={2}>
+                                    <Typography variant="h6">
+                                        time:
+                                    </Typography>
+                                    <Label variant="soft" color="warning">{settings.time + " " + "seconds"}</Label>
+                                </Box>
 
-                        <Divider />
+                                <Divider />
 
-                        <Box display={'flex'} gap={2}>
-                            <Typography variant="h6">
-                                code left:
-                            </Typography>
-                            <Label variant="soft" color="error">{(order_codes[order_codes.length - 1]?.id - +settings?.id_current)}</Label>
-                        </Box>
-                        <Box display={'flex'} gap={2}>
-                            <Typography variant="h6">
-                                time to finish:
-                            </Typography>
-                            <Label variant="soft" color="success">{"About " + ((order_codes[order_codes.length - 1]?.id - +settings?.id_current) * +settings?.time / 60).toFixed(0) + " Minutes Left"}</Label>
-                        </Box>
+                                <Box display={'flex'} gap={2}>
+                                    <Typography variant="h6">
+                                        code left:
+                                    </Typography>
+                                    <Label variant="soft" color="error">{(order_codes[order_codes.length - 1]?.id - +settings?.id_current)}</Label>
+                                </Box>
+                                <Box display={'flex'} gap={2}>
+                                    <Typography variant="h6">
+                                        time to finish:
+                                    </Typography>
+                                    <Label variant="soft" color="success">{"About " + ((order_codes[order_codes.length - 1]?.id - +settings?.id_current) * +settings?.time / 60).toFixed(0) + " Minutes Left"}</Label>
+                                </Box>
+                            </Box>
+                        )}
 
                         {(settings.stop_bot_request) ? (
                             <Button variant="contained" color="error" size="large" disabled>Wait To Robot Stoped...</Button>
