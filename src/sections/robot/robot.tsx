@@ -184,9 +184,15 @@ export default function Robot() {
                     <TextField label="run code with ids that are bigger than?" value={biggerThan} variant="filled" sx={{ width: 1, my: 3 }} onChange={(e: any) => setBiggerThan(e.target.value)} />
                     <TextField label="enter time (seconds) you want run each code" value={time} variant="filled" sx={{ width: 1, mb: 3 }} onChange={(e: any) => setTime(e.target.value)} />
                     <Stack direction={'column'} spacing={2} mb={3}>
-                        current id: {settings.id_current}
-                        bigger than: {settings.bigger_than}
-                        time: {settings.time}
+                        <Box>
+                            current id: {settings.id_current}
+                        </Box>
+                        <Box>
+                            bigger than: {settings.bigger_than}
+                        </Box>
+                        <Box>
+                            time: {settings.time}
+                        </Box>
                     </Stack>
                     <Stack direction={'row'} spacing={2}>
                         <Button variant="soft" color="success" onClick={handleRunRobot} disabled={settings.bot_status}>Rum Robot</Button>
