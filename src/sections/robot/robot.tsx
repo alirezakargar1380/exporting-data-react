@@ -13,6 +13,7 @@ import Label from "src/components/label";
 import { useGetSettings } from "src/api/settings";
 import { ConfirmDialog } from "src/components/custom-dialog";
 import { useBoolean } from "src/hooks/use-boolean";
+import { useGetOrderCodes } from "src/api/order-codes";
 
 export default function Robot() {
     const [run, setRun] = useState<boolean>(false);
@@ -22,7 +23,8 @@ export default function Robot() {
     const confirm = useBoolean();
     const emergency = useBoolean();
 
-    const { settings, refreshSetting } = useGetSettings()
+    const { settings, refreshSetting } = useGetSettings();
+    const { order_codes } = useGetOrderCodes();
 
     const methods = useForm<any>({
         defaultValues: {
@@ -188,6 +190,21 @@ export default function Robot() {
                                 time:
                             </Typography>
                             <Label variant="soft" color="warning">{settings.time + " " + "seconds"}</Label>
+                        </Box>
+
+                        <Divider />
+
+                        <Box display={'flex'} gap={2}>
+                            <Typography variant="h6">
+                                code left:
+                            </Typography>
+                            <Label variant="soft" color="error">{(order_codes[order_codes.length - 1]?.id - +settings?.id_current)}</Label>
+                        </Box>
+                        <Box display={'flex'} gap={2}>
+                            <Typography variant="h6">
+                                time to finish:
+                            </Typography>
+                            <Label variant="soft" color="error">{((order_codes[order_codes.length - 1]?.id - +settings?.id_current) * +settings?.time / 60).toFixed(0) + " Minutes Left"}</Label>
                         </Box>
 
                         {(settings.stop_bot_request) ? (
