@@ -180,7 +180,7 @@ export default function Robot() {
                             <Typography variant="h6">
                                 current id:
                             </Typography>
-                            <Label variant="soft" color="warning">{settings.id_current}</Label>
+                            <Label variant="soft" color="info">{settings.id_current}</Label>
                         </Box>
 
                         <Box display={'flex'} gap={2}>
