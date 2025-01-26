@@ -35,7 +35,8 @@ export const endpoints = {
   },
   bot: {},
   settings: {
-    stop: '/api/settings/stop'
+    stop: '/api/settings/stop',
+    reset: '/api/settings/reset',
   },
   auth: {
     me: '/api/auth/me',

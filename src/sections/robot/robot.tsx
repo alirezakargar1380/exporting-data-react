@@ -20,6 +20,7 @@ export default function Robot() {
     const [time, setTime] = useState<string>('5');
 
     const confirm = useBoolean();
+    const emergency = useBoolean();
 
     const { settings, refreshSetting } = useGetSettings()
 
@@ -88,6 +89,19 @@ export default function Robot() {
         }
     }
 
+    const handleResetSettings = async () => {
+        try {
+            await axiosInstance.patch(endpoints.settings.reset).then(() => { })
+            enqueueSnackbar('robot setting has been reset', {
+                variant: 'success',
+            });
+
+            emergency.onFalse()
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
     const handleRunRobot = async () => {
         try {
             setRun(true);
@@ -120,6 +134,18 @@ export default function Robot() {
                 action={
                     <Button variant="contained" color="error" onClick={handleDeleteAllOrderCodes}>
                         Delete
+                    </Button>
+                }
+            />
+
+            <ConfirmDialog
+                open={emergency.value}
+                onClose={emergency.onFalse}
+                title="Warning!"
+                content="do this just when bot has been crashed"
+                action={
+                    <Button variant="contained" color="error" onClick={handleResetSettings}>
+                        reset setting
                     </Button>
                 }
             />
@@ -163,6 +189,7 @@ export default function Robot() {
                     <Stack direction={'row'} spacing={2}>
                         <Button variant="soft" color="success" onClick={handleRunRobot} disabled={settings.bot_status}>Rum Robot</Button>
                         <Button variant="soft" color="error" onClick={() => confirm.onTrue()}>Delete All Order Codes</Button>
+                        <Button variant="soft" color="error" onClick={() => emergency.onTrue()}>Emergency</Button>
                     </Stack>
                 </Box>
                 <Box>
