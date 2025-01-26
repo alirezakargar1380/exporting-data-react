@@ -209,7 +209,7 @@ export default function Robot() {
                             <Typography variant="h6">
                                 time to finish:
                             </Typography>
-                            <Label variant="soft" color="error">{((order_codes[order_codes.length - 1]?.id - +settings?.id_current) * +settings?.time / 60).toFixed(0) + " Minutes Left"}</Label>
+                            <Label variant="soft" color="success">{"About " + ((order_codes[order_codes.length - 1]?.id - +settings?.id_current) * +settings?.time / 60).toFixed(0) + " Minutes Left"}</Label>
                         </Box>
 
                         {(settings.stop_bot_request) ? (
