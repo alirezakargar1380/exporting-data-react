@@ -1,7 +1,7 @@
 
 
 import LoadingButton from "@mui/lab/LoadingButton";
-import { Box, Button, Input, Stack, TextField, Typography } from "@mui/material";
+import { Box, Button, Divider, Input, Stack, TextField, Typography } from "@mui/material";
 import { useForm } from "react-hook-form";
 import FormProvider, {
     RHFTextField,
@@ -166,13 +166,29 @@ export default function Robot() {
                                 <Label variant="soft" color="error">stoped</Label>
                             )}
                         </Box>
-                        {/* <Box display={'flex'} gap={2}>
+
+                        <Divider />
+
+                        <Box display={'flex'} gap={2}>
                             <Typography variant="h6">
-                                Stop Request:
+                                bigger than:
                             </Typography>
-                            <Label variant="soft" color="warning">waiting...</Label>
-                            <Label variant="soft" color="success">normal</Label>
-                        </Box> */}
+                            <Label variant="soft" color="warning">{settings.bigger_than}</Label>
+                        </Box>
+                        
+                        <Box display={'flex'} gap={2}>
+                            <Typography variant="h6">
+                                current id:
+                            </Typography>
+                            <Label variant="soft" color="warning">{settings.id_current}</Label>
+                        </Box>
+                        
+                        <Box display={'flex'} gap={2}>
+                            <Typography variant="h6">
+                                time:
+                            </Typography>
+                            <Label variant="soft" color="warning">{settings.time}</Label>
+                        </Box>
 
                         {(settings.stop_bot_request) ? (
                             <Button variant="contained" color="error" size="large" disabled>Wait To Robot Stoped...</Button>
@@ -183,17 +199,6 @@ export default function Robot() {
                     </Stack>
                     <TextField label="run code with ids that are bigger than?" value={biggerThan} variant="filled" sx={{ width: 1, my: 3 }} onChange={(e: any) => setBiggerThan(e.target.value)} />
                     <TextField label="enter time (seconds) you want run each code" value={time} variant="filled" sx={{ width: 1, mb: 3 }} onChange={(e: any) => setTime(e.target.value)} />
-                    <Stack direction={'column'} spacing={2} mb={3}>
-                        <Box>
-                            current id: {settings.id_current}
-                        </Box>
-                        <Box>
-                            bigger than: {settings.bigger_than}
-                        </Box>
-                        <Box>
-                            time: {settings.time}
-                        </Box>
-                    </Stack>
                     <Stack direction={'row'} spacing={2}>
                         <Button variant="soft" color="success" onClick={handleRunRobot} disabled={settings.bot_status}>Rum Robot</Button>
                         <Button variant="soft" color="error" onClick={() => confirm.onTrue()}>Delete All Order Codes</Button>
